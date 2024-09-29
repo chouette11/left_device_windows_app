@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="InputSimulator" Version="1.0.4" />
     <PackageReference Include="QRCoder" Version="1.6.0" />
   </ItemGroup>
 
