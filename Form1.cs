@@ -26,6 +26,10 @@ namespace LeftDeviceWindows
         public Form1()
         {
             InitializeComponent();
+            this.Text = "LeftDevice";
+
+            this.FormBorderStyle = FormBorderStyle.FixedSingle; // ウィンドウの境界スタイルを固定にする
+            this.MaximizeBox = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -292,11 +296,15 @@ namespace LeftDeviceWindows
                 QRCodeData qrCodeData = qrGenerator.CreateQrCode(qrText, QRCodeGenerator.ECCLevel.Q);
                 QRCode qrCode = new QRCode(qrCodeData);
 
-                // QRコードをビットマップ形式で生成
-                Bitmap qrBitmap = qrCode.GetGraphic(7);
+                // PictureBoxのサイズに合わせてQRコードをビットマップ形式で生成
+                int qrCodeSize = Math.Min(pictureBox1.Width, pictureBox1.Height); // PictureBoxの幅と高さの小さい方に合わせる
+                Bitmap qrBitmap = qrCode.GetGraphic(10); // ピクセルサイズを調整
+
+                // 生成したビットマップをPictureBoxのサイズにリサイズ
+                Bitmap resizedQrBitmap = new Bitmap(qrBitmap, new Size(qrCodeSize, qrCodeSize));
 
                 // PictureBoxにQRコードを表示
-                pictureBox1.Image = qrBitmap;
+                pictureBox1.Image = resizedQrBitmap;
             }
             catch (Exception ex)
             {
