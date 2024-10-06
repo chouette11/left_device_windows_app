@@ -26,6 +26,8 @@ namespace LeftDeviceWindows
         public Form1()
         {
             InitializeComponent();
+            this.AutoScaleMode = AutoScaleMode.Dpi;  // 解像度に基づく自動スケーリング
+
             this.Text = "LeftDevice";
 
             this.FormBorderStyle = FormBorderStyle.FixedSingle; // ウィンドウの境界スタイルを固定にする
