@@ -26,34 +26,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-//namespace LeftDeviceWindows
-//{
-//    public partial class ClientForm : Form
-//    {
-//        public ClientForm()
-//        {
-//            InitializeComponent();
-//        }
-
-
-
-//        private void buttonScreenShot_Click(object sender, EventArgs e)
-//        {
-
-//        }
-
-//        private void buttonCopy_Click_1(object sender, EventArgs e)
-//        {
-
-//        }
-
-//        private void buttonCut_Click_1(object sender, EventArgs e)
-//        {
-
-//        }
-//    }
-//}
-
 
 namespace LeftDeviceWindows
 {
@@ -79,10 +51,9 @@ namespace LeftDeviceWindows
             InitializeComponent();
 
             //// フォームの初期設定
-            //this.Text = "クライアントウィンドウ";
-            //this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            //this.MaximizeBox = false;
-            //this.ClientSize = new System.Drawing.Size(1000, 600);
+            this.Text = "クライアントウィンドウ";
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
 
             // コントロールを追加
             InitializeControls();
@@ -91,22 +62,8 @@ namespace LeftDeviceWindows
         private void InitializeControls()
         {
             // IPアドレス入力
-            Label labelIpAddress = new Label() { Text = "IPア:", Left = 10, Top = 10, Width = 70 };
-            textBoxIpAddress = new TextBox() { Left = 90, Top = 10, Width = 150 };
-
-            //// アクションタイプ選択
-            //Label labelActionType = new Label() { Text = "アクションタイプ:", Left = 10, Top = 40, Width = 70 };
-            //comboBoxActionType = new ComboBox() { Left = 90, Top = 40, Width = 150 };
-            //comboBoxActionType.Items.AddRange(Enum.GetNames(typeof(ActionType)));
-            //comboBoxActionType.SelectedIndex = 0;
-
-            //// 値入力
-            //Label labelValue = new Label() { Text = "値:", Left = 10, Top = 70, Width = 70 };
-            //textBoxValue = new TextBox() { Left = 90, Top = 70, Width = 150 };
-
-            //// 送信ボタン
-            //buttonSend = new Button() { Text = "送信", Left = 90, Top = 100, Width = 80 };
-            //buttonSend.Click += ButtonSend_Click;
+            Label labelIpAddress = new Label() { Text = "IP:", Left = 10, Top = 0, Width = 70 };
+            textBoxIpAddress = new TextBox() { Left = 90, Top = 0, Width = 150, Font = new Font("Arial", 8) };
 
             // コントロールをフォームに追加
             this.Controls.Add(labelIpAddress);
