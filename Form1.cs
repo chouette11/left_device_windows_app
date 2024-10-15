@@ -133,6 +133,17 @@ namespace LeftDeviceWindows
                     }
                 }
 
+                // CORSのプリフライトリクエスト (OPTIONS メソッド) に対応
+                if (method.Equals("OPTIONS", StringComparison.OrdinalIgnoreCase))
+                {
+                    // CORSヘッダーを追加してレスポンス
+                    string corsResponseString = "HTTP/1.1 204 No Content\r\n" +
+                    "Access-Control-Allow-Origin: *\r\n" +
+                    "Access-Control-Allow-Methods: GET, POST, OPTIONS\r\n" +
+                    "Access-Control-Allow-Headers: Content-Type\r\n\r\n";
+                    await writer.WriteAsync(corsResponseString);
+                    return;
+                }
                 // リクエストボディの読み取り
                 string requestBody = "";
                 if (method.Equals("POST", StringComparison.OrdinalIgnoreCase) && headers.ContainsKey("Content-Length"))
@@ -157,8 +168,9 @@ namespace LeftDeviceWindows
                         ProcessRequest(path, requestBody);
 
                         // レスポンスを送信
-                        string responseString = "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nデータを受け取りました";
-                        await writer.WriteAsync(responseString);
+                        string responseString = "HTTP/1.1 200 OK\r\n" +
+                        "Access-Control-Allow-Origin: *\r\n" +  // CORS対応
+                        "Content-Type: text/plain\r\n\r\nデータを受け取りました"; await writer.WriteAsync(responseString);
                     }
                     else
                     {
@@ -217,7 +229,12 @@ namespace LeftDeviceWindows
                                 {
                                     // シミュレート
                                     SimulateHotkey(value);
+                                } else if (type == "typewrite")
+                                {
+                                    // キーボード入力
+                                    sim.Keyboard.TextEntry(value);
                                 }
+
                             }
                             else
                             {
@@ -449,6 +466,12 @@ namespace LeftDeviceWindows
             };
 
             return keyCodeMap.TryGetValue(key.ToLower(), out var keyCode) ? keyCode : null;
+        }
+
+        private void クライアントウィンドウToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClientForm clientForm = new ClientForm();
+            clientForm.Show();
         }
     }
 }
